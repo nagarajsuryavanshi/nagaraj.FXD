@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nagaraj Suryavanshi — Portfolio OS</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- Boot Screen -->
+  <div id="boot-screen">
+    <div class="boot-content">
+      <div class="boot-logo">
+        <div class="boot-avatar">NS</div>
+        <div class="boot-spinner">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+        </div>
+      </div>
+      <p class="boot-name">Nagaraj OS</p>
+      <p class="boot-sub">Loading portfolio...</p>
+      <div class="boot-progress-bar"><div class="boot-progress-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- Desktop Environment -->
+  <div id="desktop" class="hidden">
+
+    <!-- Menu Bar -->
+    <div id="menu-bar">
+      <div class="menu-left">
+        <span class="menu-logo"><i class="fa-solid fa-n"></i></span>
+        <span class="menu-brand">Nagaraj OS</span>
+        <div class="menu-items">
+          <span class="menu-item" data-menu="file">File</span>
+          <span class="menu-item" data-menu="view">View</span>
+          <span class="menu-item" data-menu="help">Help</span>
+        </div>
+      </div>
+      <div class="menu-right">
+        <button id="theme-toggle" title="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+        <a href="https://github.com/nagarajsuryavanshi" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://linkedin.com/in/nagarajsuryavanshi" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <div id="menu-datetime">
+          <span id="menu-date"></span>
+          <span id="menu-time"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop Icons -->
+    <div id="desktop-icons">
+      <div class="desktop-icon" data-app="about">
+        <div class="icon-img"><i class="fa-solid fa-user"></i></div>
+        <span>About Me</span>
+      </div>
+      <div class="desktop-icon" data-app="projects">
+        <div class="icon-img"><i class="fa-solid fa-folder-open"></i></div>
+        <span>Projects</span>
+      </div>
+      <div class="desktop-icon" data-app="experience">
+        <div class="icon-img"><i class="fa-solid fa-briefcase"></i></div>
+        <span>Experience</span>
+      </div>
+      <div class="desktop-icon" data-app="contact">
+        <div class="icon-img"><i class="fa-solid fa-envelope"></i></div>
+        <span>Contact</span>
+      </div>
+      <div class="desktop-icon" data-app="resume">
+        <div class="icon-img"><i class="fa-solid fa-file-pdf"></i></div>
+        <span>Resume</span>
+      </div>
+    </div>
+
+    <!-- Windows Container -->
+    <div id="windows-container"></div>
+
+    <!-- Context Menu -->
+    <div id="context-menu" class="hidden">
+      <ul>
+        <li data-action="new-window"><i class="fa-solid fa-window-maximize"></i> New Window</li>
+        <li data-action="about"><i class="fa-solid fa-user"></i> About Me</li>
+        <li data-action="theme"><i class="fa-solid fa-palette"></i> Change Theme</li>
+        <li class="separator"></li>
+        <li data-action="refresh"><i class="fa-solid fa-rotate-right"></i> Refresh Desktop</li>
+      </ul>
+    </div>
+
+    <!-- Dock -->
+    <div id="dock">
+      <div class="dock-inner">
+        <div class="dock-icon" data-app="about" title="About Me">
+          <div class="dock-icon-img"><i class="fa-solid fa-user"></i></div>
+          <span class="dock-label">About Me</span>
+          <span class="dock-dot hidden"></span>
+        </div>
+        <div class="dock-icon" data-app="projects" title="Projects">
+          <div class="dock-icon-img"><i class="fa-solid fa-folder-open"></i></div>
+          <span class="dock-label">Projects</span>
+          <span class="dock-dot hidden"></span>
+        </div>
+        <div class="dock-icon" data-app="experience" title="Experience">
+          <div class="dock-icon-img"><i class="fa-solid fa-briefcase"></i></div>
+          <span class="dock-label">Experience</span>
+          <span class="dock-dot hidden"></span>
+        </div>
+        <div class="dock-icon" data-app="contact" title="Contact">
+          <div class="dock-icon-img"><i class="fa-solid fa-envelope"></i></div>
+          <span class="dock-label">Contact</span>
+          <span class="dock-dot hidden"></span>
+        </div>
+        <div class="dock-icon" data-app="resume" title="Resume">
+          <div class="dock-icon-img"><i class="fa-solid fa-file-pdf"></i></div>
+          <span class="dock-label">Resume</span>
+          <span class="dock-dot hidden"></span>
+        </div>
+        <div class="dock-separator"></div>
+        <div class="dock-icon" data-app="finder" title="Finder">
+          <div class="dock-icon-img finder"><i class="fa-solid fa-compass"></i></div>
+          <span class="dock-label">Finder</span>
+          <span class="dock-dot hidden"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Window Template (hidden, cloned by JS) -->
+  <template id="window-template">
+    <div class="os-window" data-app="">
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <button class="wc-btn wc-close" title="Close"><i class="fa-solid fa-xmark"></i></button>
+          <button class="wc-btn wc-minimize" title="Minimize"><i class="fa-solid fa-minus"></i></button>
+          <button class="wc-btn wc-maximize" title="Maximize"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
+        </div>
+        <div class="window-title"></div>
+        <div class="window-title-spacer"></div>
+      </div>
+      <div class="window-body"></div>
+      <div class="resize-handle resize-se"></div>
+      <div class="resize-handle resize-e"></div>
+      <div class="resize-handle resize-s"></div>
+    </div>
+  </template>
+
+  <script src="js/apps/about.js"></script>
+  <script src="js/apps/projects.js"></script>
+  <script src="js/apps/experience.js"></script>
+  <script src="js/apps/contact.js"></script>
+  <script src="js/apps/resume.js"></script>
+  <script src="js/windowManager.js"></script>
+  <script src="js/dock.js"></script>
+  <script src="js/menuBar.js"></script>
+  <script src="js/contextMenu.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
