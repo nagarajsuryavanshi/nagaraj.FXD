@@ -17,7 +17,8 @@ const DOCK_ITEMS = [
 
 export default function Dock() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-  const { windows, openWindow } = useWindowStore(s => ({ windows: s.windows, openWindow: s.openWindow }));
+  const windows = useWindowStore(s => s.windows);
+  const openWindow = useWindowStore(s => s.openWindow);
 
   const isRunning = (id: string) => windows.some(w => w.id === id);
 
